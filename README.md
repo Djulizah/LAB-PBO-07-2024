@@ -14,7 +14,7 @@
 
    ```sh
 
-   git clone https://github.com/YOUR_USERNAME/LAB-PBO-03-2024.git
+   git clone https://github.com/YOUR_USERNAME/LAB-PBO-07-2024.git
 
    ```
 
@@ -22,7 +22,7 @@
 
    ```sh
 
-   cd LAP-PBO-03-2024
+   cd LAP-PBO-07-2024
    git branch NIM_ANDA
    git checkout NIM_ANDA
    git config user.name USERNAME_GITHUB
@@ -98,7 +98,7 @@
    #3. Scroll ke bagian bawah dan pilih menu Dveloper settings
    #4. Pilih Prsonal access tokens
    #5. Pilih Generate new tokes
-   #6. Tuliskan note untuk token anda (ex: Token for LAB-PBO-03-2024)
+   #6. Tuliskan note untuk token anda (ex: Token for LAB-PBO-07-2024)
    #7. Atur waktu expiration token anda (sesuai keinginan anda)
    #8. Pada select scope, ceklis box repo
    #9. Klik generate new token
