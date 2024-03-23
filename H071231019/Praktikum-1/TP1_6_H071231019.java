@@ -7,7 +7,8 @@ public class TP1_6_H071231019 {
         int n = scanner.nextInt();
         int fac = factorial(n);
         System.out.println("Faktorial dari " + n + " = " +fac);
-
+        scanner.close();
+        
         }
         public static int factorial (int n) {
             int result = 1;
