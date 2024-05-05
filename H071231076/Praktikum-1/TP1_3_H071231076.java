@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class no3 {
+public class TP1_3_H071231076 {
 
     static int CekTahun(int tahun){
         if (tahun >= 40){
