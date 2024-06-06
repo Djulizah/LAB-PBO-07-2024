@@ -1,10 +1,6 @@
-public class Projek extends Pengalaman {
+public class Projek extends Kehidupan {
     int jumlahProjek;
 
-    public Projek(String pengalamanSebelumnya, int jumlahProjek) {
-        super(pengalamanSebelumnya);
-        this.jumlahProjek = jumlahProjek;
-    }
     public Projek(int jumlahProjek) {
         this.jumlahProjek = jumlahProjek;
     }
@@ -15,6 +11,14 @@ public class Projek extends Pengalaman {
     }
     public void setJumlahProjek(int jumlahProjek) {
         this.jumlahProjek = jumlahProjek;
+    }
+    @Override
+    void prosesKehidupan() {
+        
+    }
+    @Override
+    boolean memenuhiKriteria() {
+        return jumlahProjek != 1;
     }
 
     

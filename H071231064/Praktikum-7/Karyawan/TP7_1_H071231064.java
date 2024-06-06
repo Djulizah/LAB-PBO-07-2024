@@ -1,93 +1,180 @@
+import javax.sound.sampled.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class TP7_1_H071231064 {
-    ArrayList<Karyawan> dataKaryawan = new ArrayList<>();
-    public static Scanner sc = new Scanner(System.in);
+    private static ArrayList<Karyawan> dataKaryawan = new ArrayList<>();
+    private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         TP7_1_H071231064 program = new TP7_1_H071231064();
-        program.tambahDataKaryawan();
+        program.menuAwal();
         sc.close();
     }
 
-    void tambahDataKaryawan(){
+    public void menuAwal() {
+        System.out.println("=====HaErDe=====");
+        System.out.println("a. Tambah Data Karyawan");
+        System.out.println("b. Tampilkan Detail Karyawan");
+        System.out.println("c. Keluar");
+        System.out.print("Pilih Opsi (a-c): ");
+        String pilihan = sc.nextLine();
+
+        switch (pilihan) {
+            case "a":
+                tambahDataKaryawan();
+                break;
+            case "b":
+                tampilkanKaryawan();
+                break;
+            case "c":
+                System.out.println("==============");
+                System.out.println("Thank You");
+                System.out.println("==============");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Pilihan Tidak Valid");
+                menuAwal();
+        }
+    }
+
+    private void tampilkanKaryawan() {
+        for (Karyawan karyawan : dataKaryawan) {
+            System.out.println("==============");
+            karyawan.prosesKehidupan();
+        }
+        menuAwal();
+    }
+
+    public void tambahDataKaryawan() {
         System.out.println("Nama:");
         String nama = sc.nextLine();
         System.out.println("Umur:");
         int umur = sc.nextInt();
         sc.nextLine();
-
-        Pengalaman pengalaman = new Pengalaman(inputPengalaman());
         System.out.println("Gaji:");
         double gaji = sc.nextDouble();
         sc.nextLine();
 
-        pengalaman = new Pendidikan(pengalaman.getPengalamanSebelumnya(), inputPendidikan());
-        pengalaman = new Projek(pengalaman.getPengalamanSebelumnya(), inputProject());
+        Karyawan baru = new Karyawan(nama, "Staff", umur, gaji);
+        baru.addKehidupan(new Pengalaman(inputPengalaman(),inputPengalamanOrganisasi()));
+        baru.addKehidupan(new Pendidikan(inputPendidikan()));
+        baru.addKehidupan(new Projek(inputProject()));
+        baru.addKehidupan(new Keluarga(inputKeluarga()));
 
-        System.out.println("Pengalaman Sedang diproses...");
-            Pendidikan pendidikan = (Pendidikan) pengalaman;
-            Projek projek = (Projek) pengalaman;
-
-            System.out.println("Pendidikan Terakhir: " + pendidikan.getPendidikanTerakhir());
-            System.out.println("Jumlah Projek: " + projek.getJumlahProjek());
-               
-                if (umur < 18 && projek.jumlahProjek != 1 && (pendidikan.pendidikanTerakhir != "SD" || pendidikan.pendidikanTerakhir != "SMP")) {
-                    Karyawan baru = new Karyawan(nama, "Staff", umur, gaji, pengalaman);
-                    dataKaryawan.add(baru);
-                    System.out.println("====================");
-                    System.out.println("Karyawan baru berhasil ditambahkan!");
-                    System.out.println("====================");
-                }
-        
+        if (baru.memenuhiKriteria()) {
+            dataKaryawan.add(baru);
+            System.out.println("====================");
+            System.out.println("Karyawan baru berhasil ditambahkan!");
+            playSound(true);
+            System.out.println("====================");
+            baru.prosesKehidupan();
+        } else {
+            System.out.println("====================");
+            System.out.println("Karyawan Tidak Memenuhi Syarat");
+            playSound(false);
+            System.out.println("====================");
+        }
+        menuAwal();
     }
 
-    public static String inputPendidikan(){
-        System.out.println("Pendidikan Terakhir (SD/SMP/SMA/SMK/S1/S2/S3): ");
+    public String inputPendidikan() {
+        System.out.print("Pendidikan Terakhir (SD/SMP/SMA/SMK/S1/S2/S3): ");
         return sc.nextLine();
     }
 
-    public static String inputPengalaman(){
+    public String inputPengalaman() {
         System.out.println("Pengalaman Sebelumnya:");
         System.out.println("1. Freelancer");
         System.out.println("2. Magang");
         System.out.println("3. Pekerja Tetap");
         System.out.println("4. Tidak Ada");
-        System.out.println("Input: ");
+        System.out.print("Input: ");
         int pilihan = sc.nextInt();
-        String pengalamansebelumnya;
+        sc.nextLine();
         switch (pilihan) {
-            case 1:
-                pengalamansebelumnya = "Freelancer";
-                break;
-                
-            case 2:
-                pengalamansebelumnya = "Magang";
-                break;
-        
-            case 3:
-                pengalamansebelumnya = "Pekerja Tetap";
-                break;
-        
-            case 4:
-                pengalamansebelumnya = "Tidak Ada";
-                break;
-        
-            default:
-                pengalamansebelumnya = "Tidak Ada";
-                break;
+            case 1: return "Freelancer";
+            case 2: return "Magang";
+            case 3: return "Pekerja Tetap";
+            default: return "Tidak Ada";
         }
-        return pengalamansebelumnya;
-
     }
-    public static int inputProject(){
+    
+    public String inputPengalamanOrganisasi() {
+        System.out.print("Pengalaman Organisasi : ");
+        return sc.nextLine();
+    }
+
+    public int inputProject() {
         System.out.println("Projek IT:");
         System.out.println("1. Minimal 4");
         System.out.println("2. Minimal 8");
         System.out.println("3. Minimal 12");
         System.out.println("4. Minimal 15");
-        System.out.println("Input: ");
+        System.out.print("Input: ");
         int pilihan = sc.nextInt();
+        sc.nextLine();
         return pilihan;
     }
+
+    public String inputKeluarga(){
+        System.out.print("Status Menikah : ");
+        return sc.nextLine();
+    }
+
+    // private void playSound() {
+    //     try {
+    //         // Load an external sound file
+    //         File soundFile = new File("/workspaces/LAB-PBO-07-2024/H071231064/Praktikum-7/Karyawan/success.wav"); // Replace with your sound file path
+    //         AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+    //         AudioFormat format = audioStream.getFormat();
+    //         DataLine.Info info = new DataLine.Info(Clip.class, format);
+    //         Clip audioClip = (Clip) AudioSystem.getLine(info);
+    //         audioClip.open(audioStream);
+    //         audioClip.start();
+    //         while (!audioClip.isRunning())
+    //             Thread.sleep(10);
+    //         while (audioClip.isRunning())
+    //             Thread.sleep(10);
+    //         audioClip.close();
+    //         audioStream.close();
+    //     } catch (Exception e) {
+    //         System.err.println("Audio play error: " + e.getMessage());
+    //     }
+    // }
+    // private void playSound() {
+    //     try {
+    //         FileInputStream fis = new FileInputStream("/workspaces/LAB-PBO-07-2024/H071231064/Praktikum-7/Karyawan/success.wav");
+    //         Player playMP3 = new Player(fis);
+    //         playMP3.play();
+    //     } catch (Exception e) {
+    //         System.err.println("Audio play error: " + e.getMessage());
+    //     }
+    // }
+
+    private void playSound(boolean isSuccess) {
+        String fileName = isSuccess ? "success.wav" : "error.wav";
+        try {
+            File soundFile = new File(System.getProperty("user.dir") + File.separator + fileName);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+            AudioFormat format = audioStream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            Clip audioClip = (Clip) AudioSystem.getLine(info);
+            audioClip.open(audioStream);
+            audioClip.start();
+            while (!audioClip.isRunning())
+                Thread.sleep(10);
+            while (audioClip.isRunning())
+                Thread.sleep(10);
+            audioClip.close();
+            audioStream.close();
+        } catch (Exception e) {
+            System.err.println("Audio play error: " + e.getMessage());
+        }
+    }
+    
+
+
 }

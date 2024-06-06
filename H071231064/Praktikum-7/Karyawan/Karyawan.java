@@ -1,15 +1,16 @@
+import java.util.ArrayList;
+
 public class Karyawan extends Kehidupan {
     String nama, jabatan;
     int umur;
     double gaji;
-    Pengalaman pengalaman;
+    ArrayList<Kehidupan> kehidupans = new ArrayList<>();
 
-    public Karyawan(String nama, String jabatan, int umur, double gaji, Pengalaman pengalaman) {
+    public Karyawan(String nama, String jabatan, int umur, double gaji) {
         this.nama = nama;
         this.jabatan = jabatan;
         this.umur = umur;
         this.gaji = gaji;
-        this.pengalaman = pengalaman;
     }
 
     public String getNama() {
@@ -37,23 +38,32 @@ public class Karyawan extends Kehidupan {
         this.gaji = gaji;
     }
 
+    public void addKehidupan(Kehidupan kehidupan) {
+        kehidupans.add(kehidupan);
+    }
+
     @Override
     void prosesKehidupan() {
         System.out.println("Nama: " + nama);
         System.out.println("Jabatan: " + jabatan);
         System.out.println("Umur: " + umur);
         System.out.println("Gaji: " + gaji);
-        System.out.println("Pengalaman Sebelumnya: " + pengalaman.getPengalamanSebelumnya());
+        for (Kehidupan k : kehidupans) {
+            k.prosesKehidupan();
+        }
+    }
 
-        if (pengalaman instanceof Pendidikan) {
-            Pendidikan pendidikan = (Pendidikan) pengalaman;
-            System.out.println("Pendidikan Terakhir: " + pendidikan.getPendidikanTerakhir());
+    @Override
+    boolean memenuhiKriteria() {
+        if (umur >= 18) {
+            for (Kehidupan k : kehidupans) {
+                if (!k.memenuhiKriteria()) return false;
+            }
+            return true;
+        }else{
+            return false;
         }
 
-        if (pengalaman instanceof Projek) {
-            Projek projek = (Projek) pengalaman;
-            System.out.println("Jumlah Projek: " + projek.getJumlahProjek());
-        }
     }
     
 }

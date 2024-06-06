@@ -1,10 +1,6 @@
-public class Pendidikan extends Pengalaman {
+public class Pendidikan extends Kehidupan {
     String pendidikanTerakhir;
 
-    public Pendidikan(String pengalamanSebelumnya, String pendidikanTerakhir) {
-        super(pengalamanSebelumnya);
-        this.pendidikanTerakhir = pendidikanTerakhir;
-    }
     public Pendidikan(String pendidikanTerakhir) {
         this.pendidikanTerakhir = pendidikanTerakhir;
     }
@@ -19,7 +15,11 @@ public class Pendidikan extends Pengalaman {
 
     @Override
     void prosesKehidupan() {
-        
+        System.out.println("Pendidikan Terakhir: " + pendidikanTerakhir);
+    }
+    @Override
+    boolean memenuhiKriteria() {
+        return !pendidikanTerakhir.equals("SD") && !pendidikanTerakhir.equals("SMP");
     }
 
 }
