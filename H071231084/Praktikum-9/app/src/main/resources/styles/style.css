@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.button {
+    background-color: #DAE8FF; 
+    -fx-background-color: #DAE8FF; 
+    border-color: #829BC5; 
+    -fx-border-color: #829BC5;  
+    border-radius: 50;  
+    -fx-border-radius: 50;     
+    border-width: 1.5px; 
+    -fx-border-width: 1.5px;   
+    -fx-background-radius: 50; 
+    font-family: 'Poppins';
+    -fx-font-family: 'Poppins';
+    font-weight: bold;
+    -fx-font-weight: bold;
+    font-size: 17px;
+    -fx-font-size: 17px;
+    -fx-text-fill: #829BC5; 
+    -fx-alignment: center;
+}
+
+.label-1 {
+    -fx-text-fill: #829BC5;
+    font-family: 'Poppins'; 
+    -fx-font-family: 'Poppins';
+    font-size: 30px;
+    -fx-font-size: 30px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+}
+
+.label-2 {
+    -fx-text-fill: #829BC5;
+    font-family: 'Poppins'; 
+    -fx-font-family: 'Poppins';
+    font-size: 20px;
+    -fx-font-size: 20px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+}
+
+.label-3 {
+    -fx-text-fill: #829BC5;
+    font-family: 'Poppins'; 
+    -fx-font-family: 'Poppins';
+    font-size: 15px;
+    -fx-font-size: 15px;
+    font-weight: bold;
+    -fx-font-weight: bold;
+}
+
+.label-4 {
+    -fx-text-fill: #829BC5;
+    font-family: 'Poppins'; 
+    -fx-font-family: 'Poppins';
+    font-size: 15px;
+    -fx-font-size: 15px;
+}
+
+.styled-vbox {
+    background-color: transparent; 
+    -fx-background-color: transparent; 
+    border-color: #829BC5; 
+    -fx-border-color: #829BC5;  
+    border-radius: 10;  
+    -fx-border-radius: 10;     
+    border-width: 1.5px; 
+    -fx-border-width: 1.5px;   
+    padding: 5;
+    -fx-padding: 5;
+    -fx-spacing: 5; 
+    -fx-alignment: center;
+}
+
+.label-tittle {
+    -fx-text-fill: #829BC5;
+    font-family: 'Poppins'; 
+    -fx-font-family: 'Poppins';
+    font-size: 12px;
+    -fx-font-size: 12px;
+}
